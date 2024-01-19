@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:csv/csv.dart' as csv;
-import 'package:flutter/services.dart';
 
 class BrakePieChart extends StatefulWidget {
   const BrakePieChart({Key? key}) : super(key: key);
@@ -12,45 +10,10 @@ class BrakePieChart extends StatefulWidget {
 }
 
 class _BrakePieChartState extends State<BrakePieChart> {
-  List<List<dynamic>> csvData = [];
-  Map<int, int> brakeCountMap = {};
-  int brake3Count = 0; // Variable to store the count of 'Brake 3'
 
   @override
   void initState() {
     super.initState();
-    _loadCSVData();
-  }
-
-  Future<void> _loadCSVData() async {
-    final String data = await rootBundle.loadString('assets/csv/ILP.csv');
-    final List<List<dynamic>> csvList =
-        const csv.CsvToListConverter().convert(data);
-
-    // Skip the first row (header) if it exists
-    if (csvList.isNotEmpty && csvList[0].first == 'Brake') {
-      csvList.removeAt(0);
-    }
-
-    setState(() {
-      csvData = csvList;
-      _countBrakeValues();
-    });
-  }
-
-  void _countBrakeValues() {
-    brakeCountMap.clear();
-    brake3Count = 0; // Reset the count of 'Brake 3'
-
-    for (var row in csvData) {
-      int brakeValue = int.tryParse('${row[0]}') ?? -1;
-      if (brakeValue >= 0 && brakeValue <= 3) {
-        brakeCountMap[brakeValue] = (brakeCountMap[brakeValue] ?? 0) + 1;
-        if (brakeValue == 3) {
-          brake3Count++;
-        }
-      }
-    }
   }
 
   @override
@@ -64,10 +27,34 @@ class _BrakePieChartState extends State<BrakePieChart> {
           // Use FlPieChart instead of LineChart
           PieChart(
             PieChartData(
-              sections: _getSections(),
+              sections: [
+                PieChartSectionData(
+                  color: Colors.red,
+                  value: 45,
+                  title: '45%',
+                  radius: 50,
+                ),
+                PieChartSectionData(
+                  color: Colors.blue,
+                  value: 9,
+                  title: '9%',
+                  radius: 50,
+                ),
+                PieChartSectionData(
+                  color: Colors.green,
+                  value: 14,
+                  title: '14%',
+                  radius: 50,
+                ),
+                PieChartSectionData(
+                  color: Colors.yellow,
+                  value: 32,
+                  title: '32%',
+                  radius: 50,
+                ),
+              ],
+              borderData: FlBorderData(show: false),
               sectionsSpace: 0,
-              centerSpaceRadius: 40,
-              // other configurations...
             ),
           ),
           Positioned(
@@ -145,22 +132,6 @@ class _BrakePieChartState extends State<BrakePieChart> {
         ],
       ),
     );
-  }
-
-  List<PieChartSectionData> _getSections() {
-    return brakeCountMap.entries.map((entry) {
-      final int brakeValue = entry.key;
-      final int count = entry.value;
-
-      final double percentage = (count / csvData.length) * 100;
-
-      return PieChartSectionData(
-        color: getColor(brakeValue),
-        value: count.toDouble(),
-        title: '${percentage.toStringAsFixed(1)}%',
-        radius: 50,
-      );
-    }).toList();
   }
 
   Color getColor(int brakeValue) {

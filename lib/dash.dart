@@ -4,8 +4,6 @@ import 'package:carmodel/charts/section3.dart';
 import 'package:carmodel/charts/section4.dart';
 import 'package:carmodel/charts/section5.dart';
 import 'package:carmodel/charts/section6.dart';
-import 'package:carmodel/dashboard.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 void main() {
