@@ -27,10 +27,9 @@ class LineChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
     return SizedBox(
-      width: screenWidth*0.25,
-      height: screenHeight*0.2,
+      height: 200,
+      width: screenWidth*0.7,      
       child: Stack(
         children: [
           LineChart(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:csv/csv.dart' as csv;
 import 'package:flutter/services.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class BrakePieChart extends StatefulWidget {
   const BrakePieChart({Key? key}) : super(key: key);
@@ -57,10 +56,9 @@ class _BrakePieChartState extends State<BrakePieChart> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
     return SizedBox(
-      width: screenWidth*0.25,
-      height: screenHeight*0.2,
+      height: 200,
+      width: screenWidth*0.7,
       child: Stack(
         children: [
           // Use FlPieChart instead of LineChart
@@ -78,7 +76,6 @@ class _BrakePieChartState extends State<BrakePieChart> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(192, 43, 42, 41),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Text(
@@ -115,13 +112,12 @@ class _BrakePieChartState extends State<BrakePieChart> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(192, 43, 42, 41),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Text(
                 'Medium',
                 style: TextStyle(
-                  color: Colors.yellow,
+                  color: Color.fromARGB(255, 201, 181, 0),
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
@@ -134,7 +130,6 @@ class _BrakePieChartState extends State<BrakePieChart> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(192, 43, 42, 41),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Text(
