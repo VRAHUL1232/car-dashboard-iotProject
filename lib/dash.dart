@@ -30,34 +30,6 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Analytics Graphs'),
         // Add a hamburger icon to open the drawer
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
-        ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            ListTile(
-              title: const Text('Dashboard'),
-              onTap: () {
-                Navigator.pop(context); // Close the drawer
-                // Add logic to navigate to the dashboard screen
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Dashboard()));
-              },
-            ),
-          ],
-        ),
       ),
       body: SingleChildScrollView(
           child: Column(
